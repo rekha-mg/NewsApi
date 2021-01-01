@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"> </script>
+
+    <title>News </title>
+
+    <script>
+        //<![CDATA[
+    $( document ).ready(function() {
+
+        $("#searchbtn").on("click",function () {
+            var query = $("#searchquery").val();
+
+            if(query!==""){
+                $.ajax({
+                    url:"https://newsapi.org/v2/everything?q="+query+"&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18",
+                    type: "GET",
+                    dataType:"json",
+                    data: my_data,
+                    success: function (data) {
+                        console.log(data);
+                        console.log("new result");
+                    },
+                    error: function () {
+                        console.log("some error");
+                    }
+                });
+
+            }
+            else
+            {
+                alert("plz enter to search ");
+            }
+        });
+    });
+        //]]>
+
+    </script>
+</head>
+<body>
+<form class="example" style="margin:auto;max-width:300px">
+    <input type="text" id="searchquery" placeholder="Search.." name="search2">
+    <button type="submit" id="searchbtn"><i class="fa fa-search"></i></button>
+    <div>
+<p>  </p>
+
+    </div>
+</form>
+</body>
+</html>
