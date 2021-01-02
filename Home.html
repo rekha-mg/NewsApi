@@ -10,28 +10,45 @@
 
     <title>News </title>
 
+    <style>
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            width: 150px;
+        }
+
+    </style>
     <script>
+        var output_data;
         //<![CDATA[
     $( document ).ready(function() {
 
         $("#searchbtn").on("click",function () {
             var query = $("#searchquery").val();
 
-            if(query!==""){
+
                 $.ajax({
-                    url:"https://newsapi.org/v2/everything?q="+query+"&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18",
+                    url:"https://newsapi.org/v2/everything?q="+query+"&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18&pageSize=2",
                     type: "GET",
                     dataType:"json",
-                    data: my_data,
-                    success: function (data) {
-                        console.log(data);
-                        console.log("new result");
-                    },
-                    error: function () {
-                        console.log("some error");
+
+                    success: function(news) {
+                        console.log(news);
+                        var latestnews = news.articles;
+
+                        for(var i in latestnews){
+                            output_data +='<tr> <td>'+ latestnews[i].title +'</td> <td><img src="'+ latestnews[i].urlToImage +'"></td></tr>';
+
+                        }
+                        $("#newresult").html(output_data);
                     }
                 });
 
+
+
+            if(query!==""){
+               // $("#newresult").html(output_data);
             }
             else
             {
@@ -39,6 +56,9 @@
             }
         });
     });
+
+
+
         //]]>
 
     </script>
@@ -46,9 +66,12 @@
 <body>
 <form class="example" style="margin:auto;max-width:300px">
     <input type="text" id="searchquery" placeholder="Search.." name="search2">
-    <button type="submit" id="searchbtn"><i class="fa fa-search"></i></button>
-    <div>
-<p>  </p>
+    <button type="button" id="searchbtn"><i class="fa fa-search"></i></button>
+
+    <div >
+        <table id="newresult" style=""border="1px solid blue">
+            <tr><th> Title</th><th> News </th></tr>
+        </table>
 
     </div>
 </form>
