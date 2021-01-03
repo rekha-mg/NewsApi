@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"> </script>
+    <style src="c:\code\NewsApi\news.css"> </style>
+
+    <title>News Api</title>
+<style>
+
+    #div_top{
+        background-color: beige;
+    }
+    #div_search{
+        background-color: burlywood;
+    }
+    #div_left{
+        padding-bottom: 100px;
+        background-color: coral;
+    }
+    #div_footer{
+        background-color: darkkhaki;
+    }
+    #img_table {
+
+        border-radius: 4px;
+        padding: 5px;
+        width: 200px;
+    }
+    #img_left{
+        border-radius: 4px;
+        padding:10px;
+        width: 200px;
+
+    }
+
+    #div_news_content_table{
+      background-color: cornsilk;
+    }
+    table{
+     width: 80%;
+     align-content: center;
+      }
+
+</style>
+    <script>
+        var output_data;
+        //<![CDATA[
+        $( document ).ready(function() {
+
+            $("#searchbtn").on("click",function () {
+                var query = $("#searchquery").val();
+
+
+                $.ajax({
+                    url:"https://newsapi.org/v2/everything?q="+query+"&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18&pageSize=5&page=1",
+                    type: "GET",
+                    dataType:"json",
+
+                    page:2,
+                    success: function(news) {
+                        console.log(news);
+                        var latestnews = news.articles;
+                        output_data+='';
+                        for(var i in latestnews){
+                            output_data +='<tr> <td>'+ latestnews[i].title +'</td> <td><img id="img_table" src="'+ latestnews[i].urlToImage + ' "></td></tr>';
+
+                        }
+
+                        $("#table_result").html(output_data);
+                    }
+                });
+
+
+
+                if(query!==""){
+                    // $("#newresult").html(output_data);
+                }
+                else
+                {
+                    alert("plz enter to search ");
+                }
+            });
+        });
+        //]]>
+
+    </script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row" >
+        <div class="col-12" id="div_top">
+            <h1> News </h1>
+        </div>
+    </div>
+
+    <div class="row" id="div_search">
+        <div class="col-8">  </div>
+        <div class="col-4">
+            <form name="newsform">
+                <input type="text" id="searchquery" placeholder="Search.." name="search2">
+                <button type="button" id="searchbtn"><i class="fa fa-search"></i></button>
+            </form>
+
+        </div>
+    </div>
+        <div class="row" >
+        <div class="col-3" id="div_left">
+            <div class="MagicScroll" data-options="autoplay: 1000; step: 1; mode: carousel; height: 275;">
+                <img src="images\modi.jpg" id="img_left" />
+                <img src="images\sports.jpg" id="img_left" />
+                <img src="images\medical.jpg" id="img_left" />
+                <img src="images\krona.jpg" id="img_left" />
+                <img src="images\vegetables.jpg" id="img_left" />
+            </div>
+        </div>
+        <div class="col-9" id="div_news_content_table">
+               <table id="table_result">
+                    <tr><th> Title</th><th> News </th></tr>
+                </table>
+        </div>
+
+    </div>
+    <div class="row" id="div_footer">
+        <div class="col-12">
+         <marquee> Get the latest news</marquee>
+        </div>
+
+    </div>
+</div></div>
+</body>
+</html>
