@@ -10,77 +10,83 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"> </script>
-    <style src="c:\code\NewsApi\news.css"> </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <style src="c:\code\NewsApi\news.css"></style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <title>News Api</title>
-<style>
+    <style>
 
-    #div_top{
-        background-color: beige;
-    }
-    #div_search{
-        background-color: burlywood;
-    }
-    #div_left{
-        padding-bottom: 100px;
-        background-color: coral;
-    }
-    #div_footer{
-        background-color: darkkhaki;
-    }
-    #img_table {
+        #div_top {
+            background-color: beige;
+        }
 
-        border-radius: 4px;
-        padding: 5px;
-        width: 200px;
-    }
-    #img_left{
-       padding-top: 80px;
-        border-radius: 4px;
-        border: 0px;
-        width: 200px;
-        height: 230px;
-        margin:10px;
+        #div_search {
+            background-color: burlywood;
+        }
 
-    }
+        #div_left {
+            padding-bottom: 100px;
+            background-color: coral;
+        }
 
-    #div_news_content_table{
-      background-color: cornsilk;
-    }
-    table{
-     width: 80%;
-     align-content: center;
-      }
+        #div_footer {
+            background-color: darkkhaki;
+        }
 
-</style>
+        #img_table {
+
+            border-radius: 4px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        #img_left {
+            padding-top: 80px;
+            border-radius: 4px;
+            border: 0px;
+            width: 200px;
+            height: 230px;
+            margin: 10px;
+
+        }
+
+        #div_news_content_table {
+            background-color: cornsilk;
+        }
+
+        table {
+            width: 80%;
+            align-content: center;
+        }
+
+    </style>
     <script>
         var output_data;
         //<![CDATA[
-        $( document ).ready(function() {
-            $(".modi").on("click",function (){
+        $(document).ready(function () {
+            $(".modi").on("click", function () {
                 alert("modi");
             });
 
-            $("#searchbtn").on("click",function () {
+            $("#searchbtn").on("click", function () {
                 var query = $("#searchquery").val();
 
 
                 $.ajax({
-                    url:"https://newsapi.org/v2/everything?q="+query+"&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18&pageSize=5&page=1",
+                    url: "https://newsapi.org/v2/everything?q=" + query + "&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18&pageSize=5&page=1",
                     type: "GET",
-                    dataType:"json",
+                    dataType: "json",
 
-                    page:2,
-                    success: function(news) {
+                    page: 2,
+                    success: function (news) {
                         console.log(news);
                         var latestnews = news.articles;
-                        output_data+='';
-                        for(var i in latestnews){
-                            output_data +='<tr> <td>'+ latestnews[i].title +'</td> <td><img id="img_table" src="'+ latestnews[i].urlToImage + ' "></td></tr>';
+                        output_data += '';
+                        for (var i in latestnews) {
+                            output_data += '<tr> <td>' + latestnews[i].title + '</td> <td><img id="img_table" src="' + latestnews[i].urlToImage + ' "></td></tr>';
 
                         }
 
@@ -89,12 +95,10 @@
                 });
 
 
-
-                if(query!==""){
+                if (query !== "") {
                     // $("#newresult").html(output_data);
                 }
-                else
-                {
+                else {
                     alert("plz enter to search ");
                 }
             });
@@ -107,14 +111,14 @@
 <body>
 
 <div class="container">
-    <div class="row" >
+    <div class="row">
         <div class="col-12" id="div_top">
             <h1> News </h1>
         </div>
     </div>
 
     <div class="row" id="div_search">
-        <div class="col-8">  </div>
+        <div class="col-8"></div>
         <div class="col-4">
             <form name="newsform">
                 <input type="text" id="searchquery" placeholder="Search.." name="search2">
@@ -123,7 +127,7 @@
 
         </div>
     </div>
-        <div class="row" >
+    <div class="row">
         <div class="col-3" id="div_left">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -147,18 +151,22 @@
             </div>-->
         </div>
         <div class="col-9" id="div_news_content_table">
-               <table id="table_result">
-                    <tr><th> Title</th><th> News </th></tr>
-                </table>
+            <table id="table_result">
+                <tr>
+                    <th> Title</th>
+                    <th> News</th>
+                </tr>
+            </table>
         </div>
 
     </div>
     <div class="row" id="div_footer">
         <div class="col-12">
-         <marquee> Get the latest news</marquee>
+            <marquee> Get the latest news</marquee>
         </div>
 
     </div>
-</div></div>
+</div>
+</div>
 </body>
 </html>
