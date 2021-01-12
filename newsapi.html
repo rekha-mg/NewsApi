@@ -12,101 +12,13 @@
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
-    <style src="news.css"></style>
+   <link rel="stylesheet" href="news.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+   <script src="news.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <title>News Api</title>
-    <style>
 
-        #div_top {
-            background-color: beige;
-        }
-
-        #div_search {
-            background-color: burlywood;
-        }
-
-        #div_left {
-            padding-bottom: 100px;
-            background-color: coral;
-        }
-
-        #div_footer {
-            background-color: darkkhaki;
-        }
-
-        #img_table {
-
-            border-radius: 4px;
-            padding: 5px;
-            width: 200px;
-        }
-
-        #img_left {
-            padding-top: 80px;
-            border-radius: 4px;
-            border: 0px;
-            width: 200px;
-            height: 230px;
-            margin: 10px;
-
-        }
-
-        #div_news_content_table {
-            background-color: cornsilk;
-        }
-
-        table {
-            width: 80%;
-            align-content: center;
-        }
-
-    </style>
-    <script>
-        var output_data;
-        var query;
-
-        function searchdata() {
-                        if (query !== "") {
-                // $("#newresult").html(output_data);
-                alert($("#searchquery").val());
-                var query = $("#searchquery").val();
-                $("#searchquery").val(" ");
-            }
-            else {
-                alert("plz enter to search ");
-            }
-            getdata(query);
-        }
-        //<![CDATA[
-
-        function getdata(query) {
-
-
-                $.ajax({
-                    url: "https://newsapi.org/v2/everything?q=" + query + "&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18&pageSize=5&page=1",
-                    type: "GET",
-                    dataType: "json",
-
-                    page: 2,
-                    success: function (news) {
-                        console.log(news);
-                        output_data ="";
-                        var latestnews = news.articles;
-                        output_data += '';
-                        for (var i in latestnews) {
-                            output_data += '<tr> <td>' + latestnews[i].title + '</td> <td><img id="img_table" src="' + latestnews[i].urlToImage + ' "></td></tr>';
-                        }
-                        $("#table_result").html(output_data);
-                    }
-                });
-             }
-
-        //]]>
-
-    </script>
 
 </head>
 <body>
