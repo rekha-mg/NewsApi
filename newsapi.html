@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <style src="c:\code\NewsApi\news.css"></style>
+
+    <style src="news.css"></style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -65,18 +66,24 @@
     </style>
     <script>
         var output_data;
+        var query;
+
+        function searchdata() {
+                        if (query !== "") {
+                // $("#newresult").html(output_data);
+                alert($("#searchquery").val());
+                var query = $("#searchquery").val();
+                $("#searchquery").val(" ");
+            }
+            else {
+                alert("plz enter to search ");
+            }
+            getdata(query);
+        }
         //<![CDATA[
 
-        function getdata() {
+        function getdata(query) {
 
-
-
-
-            if (query !== "") {
-                // $("#newresult").html(output_data);
-                alert ($("#searchquery").val());
-                var query =   $("#searchquery").val();
-                $("#searchquery").val(" ");
 
                 $.ajax({
                     url: "https://newsapi.org/v2/everything?q=" + query + "&apiKey=f6dd5bda11e74103b2f00b04fb5c5a18&pageSize=5&page=1",
@@ -86,6 +93,7 @@
                     page: 2,
                     success: function (news) {
                         console.log(news);
+                        output_data ="";
                         var latestnews = news.articles;
                         output_data += '';
                         for (var i in latestnews) {
@@ -94,18 +102,8 @@
                         $("#table_result").html(output_data);
                     }
                 });
-            }
-            else {
-                alert("plz enter to search ");
-            }
+             }
 
-
-
-        }
-        $(document).ready(function () {
-
-
-        });
         //]]>
 
     </script>
@@ -125,7 +123,7 @@
         <div class="col-4">
             <form name="newsform">
                 <input type="text" id="searchquery" placeholder="Search.." name="search2">
-                <button type="button" id="searchbtn" onclick="getdata()"><i class="fa fa-search"></i></button>
+                <button type="button" id="searchbtn" onclick="searchdata()"><i class="fa fa-search"></i></button>
             </form>
 
         </div>
@@ -135,17 +133,30 @@
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="images\modi.jpg" id="img_left" class="d-block w-100" alt="..." onclick="">
+                        <img src="images\modi.jpg" id="img_left" class="d-block w-100" alt="..." onclick="getdata('modi')">
                     </div>
                     <div class="carousel-item">
-                        <img src="images\sports.jpg" id="img_left" class="d-block w-100" alt="...">
+                        <img src="images\sports.jpg" id="img_left" class="d-block w-100" alt="..." onclick="getdata('sports')">
                     </div>
                     <div class="carousel-item">
-                        <img src="images\medical.jpg" id="img_left" class="d-block w-100" alt="...">
+                        <img src="images\medical.jpg" id="img_left" class="d-block w-100" alt="..." onclick="getdata('medical')">
                     </div>
                 </div>
             </div>
 
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images\china.jpg" id="img_left" class="d-block w-100" alt="..." onclick="getdata('china')">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images\google.jpg" id="img_left" class="d-block w-100" alt="..." onclick="getdata('google')">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images\stock.webp" id="img_left" class="d-block w-100" alt="..." onclick="getdata('stock')">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-9" id="div_news_content_table">
             <table id="table_result">
